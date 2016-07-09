@@ -9,5 +9,10 @@ $ MIX_ENV=test mix ecto.migrate
 
 $ mix test --stale 
 
-$ mix phoenix.gen.model Comment comments post:reference body:text
+$ mix phoenix.gen.model Comment comments post_id:references:posts body:text 
 
+$ mix ecto.migrate
+
+$ MIX_ENV=test mix ecto.migrate
+
+$ mix test --stale 
