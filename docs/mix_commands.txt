@@ -1,0 +1,13 @@
+
+$ mix phoenix.new blog
+
+$ mix phoenix.gen.html Post posts title:string body:text  
+
+$ mix ecto.migrate
+
+$ MIX_ENV=test mix ecto.migrate
+
+$ mix test --stale 
+
+$ mix phoenix.gen.model Comment comments post:reference body:text
+
