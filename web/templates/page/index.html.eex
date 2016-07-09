@@ -1,9 +1,27 @@
 <div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+  <h2><%= gettext "Welcome to %{name}", name: "My Demo Blog" %></h2>
+  <p class="lead">A small exploration of has_many associations in Phoenix/Ecto.</p>
 </div>
 
 <div class="row marketing">
+  <div class="col-lg-6">
+    <h4>Blog</h4>
+    <ul>
+      <li>
+        <%= link "Posts", to: post_path(@conn, :index) %> A Post has_many Comments
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-lg-6">
+    <h4>References</h4>
+    <ul>
+      <li>
+        <%= link "Working with Ecto associations and embeds", to: "http://blog.plataformatec.com.br/2015/08/working-with-ecto-associations-and-embeds/" %> 
+      </li>
+    </ul>
+  </div>
+
   <div class="col-lg-6">
     <h4>Resources</h4>
     <ul>
