@@ -1,14 +1,14 @@
-defmodule Blog.Tag do
+defmodule Blog.PostTag do
   use Blog.Web, :model
 
-  schema "tags" do
-    many_to_many :posts, Blog.Post, join_through: Blog.PostTag
-    field :name, :string
+  schema "posts_tags" do
+    belongs_to :post, Blog.Post
+    belongs_to :tag, Blog.Tag
 
     timestamps
   end
 
-  @required_fields ~w(name)
+  @required_fields ~w()
   @optional_fields ~w()
 
   @doc """

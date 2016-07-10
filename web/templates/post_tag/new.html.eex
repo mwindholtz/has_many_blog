@@ -1,0 +1,5 @@
+<h2>New post tag</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: post_tag_path(@conn, :create) %>
+

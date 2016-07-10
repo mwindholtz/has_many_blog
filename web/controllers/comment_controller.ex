@@ -15,7 +15,7 @@ defmodule Blog.CommentController do
     post = conn.assigns.post
     changeset = 
       post
-        |> Ecto.Model.build(:comments)
+        |> Ecto.build_assoc(:comments)
         |> Comment.changeset(comment_params)
 
     case Repo.insert(changeset) do
