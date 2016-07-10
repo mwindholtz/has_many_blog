@@ -23,7 +23,16 @@
     <li> <%= comment.body %> 
          <%= link "Delete", to: post_comment_path(@conn, :delete, @post, comment), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
 
-</li>
+    </li>
+  <% end %>
+</ul>
+
+
+<h4> Tags </h4>
+<ul>
+  <%= for tag <- @post.tags  do %>
+    <li> <%= tag.name %> 
+    </li>
   <% end %>
 </ul>
 

@@ -2,6 +2,7 @@ defmodule Blog.Tag do
   use Blog.Web, :model
 
   schema "tags" do
+    many_to_many :posts, Blog.Post, join_through: Blog.PostTag
     field :name, :string
 
     timestamps

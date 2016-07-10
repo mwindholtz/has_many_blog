@@ -3,6 +3,7 @@ defmodule Blog.Post do
 
   schema "posts" do
     has_many :comments, Blog.Comment
+    many_to_many :tags, Blog.Tag, join_through: Blog.PostTag
     field :title, :string
     field :body, :string
     timestamps

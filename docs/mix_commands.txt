@@ -16,3 +16,7 @@ $ mix ecto.migrate
 $ MIX_ENV=test mix ecto.migrate
 
 $ mix test --stale 
+
+mix phoenix.gen.html Tag tags name:string
+
+mix phoenix.gen.html PostTag posts_tags post_id:references:posts 

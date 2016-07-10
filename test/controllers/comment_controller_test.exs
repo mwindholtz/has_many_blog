@@ -11,7 +11,7 @@ defmodule Blog.CommentControllerTest do
     post_attrs  = %{body: "some content", title: "some content"}
     changeset   = Post.changeset(%Post{}, post_attrs)
     {:ok, post} = Repo.insert(changeset)
-    conn = conn()
+    conn = build_conn()
     conn = assign(conn, :post, post)
     {:ok, conn: conn}
   end
