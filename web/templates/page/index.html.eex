@@ -10,6 +10,9 @@
       <li>
         <%= link "Posts", to: post_path(@conn, :index) %> A Post has_many Comments
       </li>
+      <li>
+        <%= link "Tags", to: tag_path(@conn, :index) %> All Tags
+      </li>
     </ul>
   </div>
 
