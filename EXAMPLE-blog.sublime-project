@@ -1,0 +1,24 @@
+{
+  "folders":
+  [
+    {
+      "path": "config"
+    },
+    {
+      "path": "docs"
+    },
+    {
+      "path": "lib"
+    },
+    {
+      "path": "priv"
+    },
+    {
+      "path": "test"
+    },
+    {
+      "path": "web"
+    }
+  ]
+}
+
