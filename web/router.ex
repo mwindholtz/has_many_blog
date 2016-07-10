@@ -15,11 +15,11 @@ defmodule Blog.Router do
 
   scope "/", Blog do
     pipe_through :browser # Use the default browser stack
-
-     resources "/posts", PostController
-     resources "/comments", CommentController #, only: [:create, :destroy]
-
      get "/", PageController, :index
+     resources "/posts", PostController do
+       resources "/comments", CommentController, only: [:new, :create, :delete]
+     end
+
   end
 
   # Other scopes may use custom stacks.

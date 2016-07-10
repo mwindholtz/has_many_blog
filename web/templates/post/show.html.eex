@@ -12,6 +12,19 @@
     <%= @post.body %>
   </li>
 
+  <li>
+    <%= link "New comment", to: post_comment_path(@conn, :new, @post) %>
+  </li>
+</ul>
+
+<h4> Comments </h4>
+<ul>
+  <%= for comment <- @post.comments do %>
+    <li> <%= comment.body %> 
+         <%= link "Delete", to: post_comment_path(@conn, :delete, @post, comment), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+
+</li>
+  <% end %>
 </ul>
 
 <%= link "Edit", to: post_path(@conn, :edit, @post) %>

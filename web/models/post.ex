@@ -2,9 +2,9 @@ defmodule Blog.Post do
   use Blog.Web, :model
 
   schema "posts" do
+    has_many :comments, Blog.Comment
     field :title, :string
     field :body, :string
-
     timestamps
   end
 

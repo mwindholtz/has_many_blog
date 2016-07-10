@@ -19,6 +19,10 @@
       <li>
         <%= link "Working with Ecto associations and embeds", to: "http://blog.plataformatec.com.br/2015/08/working-with-ecto-associations-and-embeds/" %> 
       </li>
+      <li>
+        <%= link "Phoenix Training with Chris McCord ($25)", to: "https://phoenix.dpdcart.com/product/121576" %> 
+      </li>
+
     </ul>
   </div>
 

@@ -30,6 +30,7 @@ defmodule Blog.PostController do
 
   def show(conn, %{"id" => id}) do
     post = Repo.get!(Post, id)
+    post = Repo.preload(post, :comments)
     render(conn, "show.html", post: post)
   end
 
@@ -64,4 +65,5 @@ defmodule Blog.PostController do
     |> put_flash(:info, "Post deleted successfully.")
     |> redirect(to: post_path(conn, :index))
   end
+
 end
