@@ -16,6 +16,7 @@ defmodule Blog.PostTagController do
     %{"tag_id" => tag_id} = post_tag_params
      post = conn.assigns.post
     
+    # TODO: Using PostTag seems wrong when we have a many_to_many, need a better way
     case Repo.insert(%PostTag{post_id: post.id, tag_id: int(tag_id)}) do
       {:ok, _post_tag} ->
         conn
@@ -27,18 +28,18 @@ defmodule Blog.PostTagController do
     end
   end
 
-  # def delete(conn, %{"id" => id}) do
-  #   post = conn.assigns.post
-  #   post_tag = Repo.get!(PostTag, id)
+  def delete(conn, %{"id" => id}) do
+    post = conn.assigns.post
+    tag = Repo.get!(Tag, id)
 
-  #   # Here we use delete! (with a bang) because we expect
-  #   # it to always work (and if it does not, it will raise).
-  #   Repo.delete!(post_tag)
+    # TODO: Using PostTag seems wrong when we have a many_to_many, need a better way
+    [post_tag] = Repo.all(from pt in PostTag, where: pt.post_id = ^post.id and pt.tag_id = ^id)
+    Repo.delete!(post_tag)
 
-  #   conn
-  #   |> put_flash(:info, "Tag removed successfully.")
-  #   |> redirect(to: post_path(conn, :index))
-  # end
+    conn
+    |> put_flash(:info, "Tag removed successfully.")
+    |> redirect(to: post_path(conn, :index))
+  end
 
   defp find_post(conn, _opts) do
     assign(conn, :post,

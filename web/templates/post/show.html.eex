@@ -17,7 +17,7 @@
   </li>
 
   <li>
-    <%= link "Manage Tags", to: post_post_tag_path(@conn, :new, @post) %>
+    <%= link "Add a Tag", to: post_post_tag_path(@conn, :new, @post) %>
   </li>
 </ul>
 
@@ -35,7 +35,9 @@
 <h4> Tags </h4>
 <ul>
   <%= for tag <- @post.tags  do %>
-    <li> <%= tag.name %> 
+    <li>
+      <%= tag.name %> ( <%= tag.id %>  )
+      <%= link "Delete", to: post_post_tag_path(@conn, :delete, @post, tag), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
     </li>
   <% end %>
 </ul>
