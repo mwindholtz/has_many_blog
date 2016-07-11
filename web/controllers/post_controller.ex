@@ -30,7 +30,10 @@ defmodule Blog.PostController do
 
   def show(conn, %{"id" => id}) do
     post = Repo.get!(Post, id)
-    post = Repo.preload(post, :comments)
+     |> Repo.preload(:comments)
+     |> Repo.preload(:tags)
+   comments = Repo.all assoc(post, :comments)
+
     # [post] = Repo.all(from(p in Post, where: p.id == ^id, preload: :comments))
     render(conn, "show.html", post: post)
   end

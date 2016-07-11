@@ -15,6 +15,10 @@
   <li>
     <%= link "New comment", to: post_comment_path(@conn, :new, @post) %>
   </li>
+
+  <li>
+    <%= link "New tag", to: post_post_tag_path(@conn, :new, @post) %>
+  </li>
 </ul>
 
 <h4> Comments </h4>
@@ -30,10 +34,10 @@
 
 <h4> Tags </h4>
 <ul>
-  <%#= for tag <- @post.tags  do %>
-    <li> <%#= tag.name %> 
+  <%= for tag <- @post.tags  do %>
+    <li> <%= tag.name %> 
     </li>
-  <%# end %>
+  <% end %>
 </ul>
 
 <%= link "Edit", to: post_path(@conn, :edit, @post) %>

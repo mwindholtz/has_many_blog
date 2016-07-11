@@ -18,9 +18,9 @@ defmodule Blog.Router do
      get "/", PageController, :index
      resources "/posts", PostController do
        resources "/comments", CommentController, only: [:new, :create, :delete]
+       resources "/tags",     PostTagController, only: [:new, :create, :delete]   
      end
      resources "/tags", TagController, only: [:new, :create, :delete, :index]
-     resources "/post_tags", PostTagController, only: [:new, :create, :delete]   
   end
 
   # Other scopes may use custom stacks.

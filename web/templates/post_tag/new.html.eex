@@ -1,5 +1,21 @@
-<h2>New post tag</h2>
+<h3>Select Tag to add to Post</h3>
+<h1><%= @post.title %></h1>
 
-<%= render "form.html", changeset: @changeset,
-                        action: post_tag_path(@conn, :create) %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for tag <- @tags do %>
+    <tr>
+      <td> <%= tag.name %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
 
+<%= link "New tag", to: tag_path(@conn, :new) %> | 
+<%= link "Back", to: post_path(@conn, :show, @post) %>
