@@ -29,7 +29,8 @@ defmodule Blog.PostController do
   end
 
   def show(conn, %{"id" => id}) do
-    [post] = Repo.all(from(p in Post, where: p.id == ^id, preload: [:comments, :tags]))
+    post = Repo.get!(Post, id)
+    post = Repo.preload(post, :comments)
     render(conn, "show.html", post: post)
   end
 
