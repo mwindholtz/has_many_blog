@@ -1,4 +1,4 @@
-<h3>Select Tag to add to Post</h3>
+<h3>Manage Tags</h3>
 <h1><%= @post.title %></h1>
 
 <table class="table">
@@ -9,13 +9,19 @@
     </tr>
   </thead>
   <tbody>
-<%= for tag <- @tags do %>
-    <tr>
-      <td> <%= tag.name %></td>
-    </tr>
-<% end %>
+  <h3>Add Tags</h3>
+  <ul>
+      <%= for tag <- @tags do %>
+        <li> 
+          <%= form_for @changeset, post_post_tag_path(@conn, :create, @post), fn f -> %>
+            <%= hidden_input f, :tag_id, [ value: tag.id] %>
+            <%= submit "#{tag.name}-#{tag.id}", class: "btn btn-primary" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
   </tbody>
 </table>
 
-<%= link "New tag", to: tag_path(@conn, :new) %> | 
-<%= link "Back", to: post_path(@conn, :show, @post) %>
+<%= link "Global Tags", to: tag_path(@conn, :index) %> | 
+<%= link "Back to Post", to: post_path(@conn, :show, @post) %>

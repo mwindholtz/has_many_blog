@@ -5,7 +5,7 @@ defmodule Blog.PostTagControllerTest do
   alias Blog.Post
   alias Blog.Tag
 
-  @valid_attrs %{}
+  @valid_attrs   %{}
   @invalid_attrs %{}
 
   setup do
@@ -18,23 +18,24 @@ defmodule Blog.PostTagControllerTest do
     {:ok, tag} = Repo.insert(changeset)
 
     conn = build_conn()
-    conn = assign(conn, :post, post)
-    conn = assign(conn, :tag, tag)
+    conn = assign(conn, :test_post, post)
+    conn = assign(conn, :test_tag, tag)
     {:ok, conn: conn}
   end
 
   test "renders form for new resources", %{conn: conn} do
-    post = conn.assigns.post
+    post = conn.assigns.test_post
     conn = get conn, post_post_tag_path(conn, :new, post)
-    assert html_response(conn, 200) =~ "Select Tag to add to Post"
+    assert html_response(conn, 200) =~ "Global Tags"
   end
 
-  # test "creates resource and redirects when data is valid", %{conn: conn} do
-  #   post = conn.assigns.post
-  #   conn = post conn, post_post_tag_path(conn, :create, post), post_tag: @valid_attrs
-  #   assert redirected_to(conn) == post_path(conn, :show, post)
-  #   assert Repo.get_by(PostTag, @valid_attrs)
-  # end
+  test "creates resource and redirects when data is valid", %{conn: conn} do
+    post = conn.assigns.test_post
+    tag  = conn.assigns.test_tag
+    conn = post conn, post_post_tag_path(conn, :create, post), post_tag: %{tag_id: "#{tag.id}"}
+    assert redirected_to(conn) == post_path(conn, :show, post)
+    assert Repo.get_by(PostTag, @valid_attrs)
+  end
 
   # # TODO: check for valid attrs
   # # 
@@ -44,7 +45,7 @@ defmodule Blog.PostTagControllerTest do
   # # end
 
   # test "deletes chosen resource", %{conn: conn} do
-  #   post = conn.assigns.post
+  #   post = conn.assigns.test_post
   #   post_tag = Repo.insert! %PostTag{}
   #   conn = delete conn, post_post_tag_path(conn, :delete, post)
   #   assert redirected_to(conn) == post_path(conn, :show, post)

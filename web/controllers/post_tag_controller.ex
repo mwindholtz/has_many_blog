@@ -7,27 +7,25 @@ defmodule Blog.PostTagController do
   plug :scrub_params, "post_tag" when action in [:create, :update]
 
   def new(conn, _params) do
+    changeset = PostTag.changeset(%PostTag{})
     tags = Repo.all(Blog.Tag)
-    render(conn, "new.html", tags: tags)
+    render(conn, "new.html", changeset: changeset, tags: tags)  
   end
 
-  # def create(conn, %{"post_tag" => post_tag_params}) do
-  #   post = conn.assigns.post
-  #   changeset = 
-  #     post
-  #       |> Ecto.build_assoc(:post_tag)
-  #       |> PostTag.changeset(post_tag_params)
+  def create(conn, %{"post_tag" => post_tag_params}) do    
+    %{"tag_id" => tag_id} = post_tag_params
+     post = conn.assigns.post
+    
+    case Repo.insert(%PostTag{post_id: post.id, tag_id: int(tag_id)}) do
+      {:ok, _post_tag} ->
+        conn
+        |> put_flash(:info, "Tag added successfully.")
+        |> redirect(to: post_path(conn, :show, post))
 
-  #   case Repo.insert(changeset) do
-  #     {:ok, _post_tag} ->
-  #       conn
-  #       |> put_flash(:info, "Post tag created successfully.")
-  #       |> redirect(to: post_path(conn, :index))
-
-  #     {:error, changeset} ->
-  #       render(conn, "new.html", changeset: changeset)
-  #   end
-  # end
+      {:error, changeset} ->
+        render(conn, "new.html", changeset: changeset)
+    end
+  end
 
   # def delete(conn, %{"id" => id}) do
   #   post = conn.assigns.post
@@ -38,7 +36,7 @@ defmodule Blog.PostTagController do
   #   Repo.delete!(post_tag)
 
   #   conn
-  #   |> put_flash(:info, "Post tag deleted successfully.")
+  #   |> put_flash(:info, "Tag removed successfully.")
   #   |> redirect(to: post_path(conn, :index))
   # end
 
@@ -47,4 +45,12 @@ defmodule Blog.PostTagController do
            Repo.get!(Blog.Post, conn.params["post_id"]))
   end
 
+  defp get_tag(post_tag_params) do
+    %{"tag_id" => tag_id} = post_tag_params
+    Repo.get!(Blog.Tag, tag_id)
+  end
+  
+  defp int(string) do
+    String.to_integer(string)
+  end
 end

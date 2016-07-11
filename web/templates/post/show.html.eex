@@ -17,7 +17,7 @@
   </li>
 
   <li>
-    <%= link "New tag", to: post_post_tag_path(@conn, :new, @post) %>
+    <%= link "Manage Tags", to: post_post_tag_path(@conn, :new, @post) %>
   </li>
 </ul>
 
@@ -40,5 +40,5 @@
   <% end %>
 </ul>
 
-<%= link "Edit", to: post_path(@conn, :edit, @post) %>
-<%= link "Back", to: post_path(@conn, :index) %>
+<%= link "Edit", to: post_path(@conn, :edit, @post) %> |
+<%= link "All Posts", to: post_path(@conn, :index) %>
